@@ -98,6 +98,7 @@
 %============================ 我自己用的一些小命令 =========%
 
 \RequirePackage{textcomp}%摄氏度
+\RequirePackage{siunitx}
 
 
 

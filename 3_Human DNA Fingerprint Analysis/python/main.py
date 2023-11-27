@@ -2,10 +2,10 @@ import os
 import pandas as pd
 
 # 设置工作目录
-os.chdir("F://Onedrive//study//生物//遗传学//实验报告//3_人类DNA指纹分析//python")
+os.chdir("F:/Onedrive/study/生物/遗传学/实验报告/3_Human DNA Fingerprint Analysis/python")
 
 # 导入数据 ###########################
-csv_files = [file for file in os.listdir("..\data") if file.endswith(".csv") and file != "summary.csv"]
+csv_files = [file for file in os.listdir("../data") if file.endswith(".csv") and file != "summary.csv"]
 csv_files = [os.path.join("..\data", file) for file in csv_files]
 data_list = [pd.read_csv(file) for file in csv_files]
 # 显示导入的数据 ######################
@@ -22,6 +22,7 @@ class DnaFingerprintLane:
         m_filename: 文件名
         m_data: 数据
         m_edge: 177
+        m_edge2: 4945
         m_laneID: 泳道编号
         m_category: 类别（marker 或 sample）
         m_MW: 分子量
@@ -33,6 +34,7 @@ class DnaFingerprintLane:
         self.m_data = data
 
         self.m_edge = 177
+        self.m_edge2 = 4945
         self.m_laneID = data["Lane #"].iloc[0]
         if len(data[" Band #"]) == 11:
             self.m_category = "marker"
@@ -42,7 +44,7 @@ class DnaFingerprintLane:
 
         else:
             self.m_category = "sample"
-            self.m_MW = data[" MW"][data[" MW"] > self.m_edge].astype(float).tolist()
+            self.m_MW = data[" MW"][(data[" MW"] > self.m_edge) & (data[" MW"] < self.m_edge2)].astype(float).tolist()
             self.m_repeatNum = self.calculate_repeat_num()
             if len(self.m_MW) == 1:
                 self.m_homoORheter = "homo"
@@ -56,10 +58,10 @@ class DnaFingerprintLane:
                 self.m_homoORheter = "???"
 
     def calculate_repeat_num(self):
-        repeat_num = 1 + (self.m_data[" MW"][
-                            (self.m_data["Lane #"] == self.m_laneID) & (self.m_data[" MW"] > self.m_edge)] - 161) / 16
-        return repeat_num.astype(float).tolist()
 
+        mw_series = pd.Series(self.m_MW)
+        repeat_num = 1 + (mw_series[mw_series > self.m_edge] - 161) / 16
+        return repeat_num.astype(float).tolist()
     def printLane(self):
         print(f"文件：{self.m_filename}")
         print(f"泳道编号：{self.m_laneID}")
@@ -77,6 +79,28 @@ for i, data_frame in enumerate(data_list):
         lane = data_frame[data_frame["Lane #"] == j]
         #DnaFingerprintLane(lane, csv_files[i]).printLane()
         lane_objects.append(DnaFingerprintLane(lane, csv_files[i]))
+
+# for lane in lane_objects:
+#     lane.printLane()
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Filter lanes based on m_homoORheter attribute
+filtered_lanes = [lane for lane in lane_objects if lane.m_category == "sample" and lane.m_homoORheter in ["homo", "heter"]]
+for lane in filtered_lanes:
+    lane.printLane()
+
+repeat_nums = []
+for lane in filtered_lanes:
+    repeat_nums.extend(lane.m_repeatNum)
+
+plt.hist(repeat_nums, bins=30, edgecolor='black')
+plt.title('Repeat Number Frequency')
+plt.xlabel('Repeat Number')
+plt.ylabel('Frequency')
+#plt.show()
+plt.savefig(f'../output/frequencyimg.png')
 
 # 生成汇总表格
 # 排除 marker, no result, contamination
@@ -106,9 +130,6 @@ print(nums)
 # 导出 CSV 文件
 summary.to_csv(r"..\data\summary.csv", index=False)
 print(summary)
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 length = 45
 imgcount = 0
