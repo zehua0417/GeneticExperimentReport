@@ -1,0 +1,336 @@
+\documentclass[UTF8,12pt,AutoFakeBold]{article}
+\usepackage{fontspec} % 字体设置
+\setmainfont{Times New Roman} % 英文字体
+\usepackage{ctex} % 中文支持
+\setCJKmainfont{FangSong} % 中文字体
+\usepackage{FiraMono} % 等宽字体
+\usepackage{longtable} % 长表格支持
+\usepackage{graphicx} % 图片支持
+\usepackage{fancyhdr} % 页眉页脚设置
+\usepackage{amsmath} % 数学符号
+\usepackage{listings} % 代码插入
+\usepackage{hyperref} % 超链接
+\usepackage{booktabs} % 表格线
+\usepackage{xcolor}   % 支持颜色
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{color} % 页面边距
+%\renewcommand*\familydefault{\ttdefault}
+%\usepackage{fontenc}
+
+% HTML      color
+% black     1E1E1E      background
+% gray      75715E
+% lightgray D4D4D4      comment
+% pink      FF0080      keyword
+% green     7FB80E      identifier
+% purple    8E7CC3
+% blue      00BFFF      numbers
+% yellow    FFD700      string
+\definecolor{listing-background}{HTML}{1E1E1E}
+\definecolor{listing-rule}{HTML}{75715E}
+\definecolor{listing-text}{HTML}{D4D4D4}
+\definecolor{listing-comment}{HTML}{75715E}
+\definecolor{RcodeNUM}{HTML}{1E1E1E}
+\definecolor{RcodeKeyword}{HTML}{FF0080}
+\definecolor{RcodeIdentifier}{HTML}{7FB80E}
+\definecolor{RcodeSTR}{HTML}{FFD700}
+\lstdefinestyle{myRstyle}{
+    language=R,
+    backgroundcolor=\color{listing-background},
+    basicstyle=\color{listing-text}\ttfamily,
+    identifierstyle=\color{RcodeIdentifier},
+    otherkeywords={@brief ,@slot,@return,@param,.Object,\$},
+    keywordstyle=\color{RcodeKeyword}\bfseries\bfseries,
+    commentstyle=\color{listing-comment},
+    stringstyle=\color{RcodeSTR},
+    numbers=left,
+    numberstyle=\small\color{RcodeNUM}\bfseries,
+    stepnumber=1,
+    numbersep=5pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{listing-rule},
+    breakatwhitespace=true,
+    tabsize=4,
+    literate={@}{{\textcolor{RcodeKeyword}{@}}}1,
+    alsoletter={.},
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+}
+
+\definecolor{BashcodeKeyword}{HTML}{00BFFF}
+\definecolor{BashCodeAdmin}{HTML}{7FB80E}
+\lstdefinestyle{myBashstyle}{
+    language=bash,
+    backgroundcolor=\color{listing-background},
+    basicstyle=\color{listing-text}\ttfamily,
+    identifierstyle=\color{listing-text},
+    otherkeywords={tree, Rscript,\$,@},
+    keywordstyle=\color{BashcodeKeyword}\bfseries\bfseries,
+    commentstyle=\color{listing-comment},
+    stringstyle=\color{listing-text},
+    numbers=left,
+    numberstyle=\small\color{RcodeNUM}\bfseries,
+    stepnumber=1,
+    numbersep=5pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{listing-rule},
+    breakatwhitespace=true,
+    tabsize=4,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    moredelim=[is][\color{BashCodeAdmin}\bfseries]{>>}{<<}
+}
+
+% 设置页眉页脚
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\thepage}
+\lhead{\leftmark}
+
+%! language = Latex
+\begin{document}
+
+    \title{\textbf{人类DNA指纹分析}}
+    \author{生物信息班~李泽华 320210928501}
+    \date{\today}
+    \maketitle
+
+    \tableofcontents
+    \newpage
+
+    %% 摘要
+    \begin{center}
+        {\bfseries abstract}\par
+        \vspace{0.5cm}
+        \begin{minipage}{0.8\textwidth}
+            \setlength{\parindent}{2em}
+            \setlength{\parskip}{1em}
+            \linespread{1}
+            \indent ...
+        \end{minipage}
+        \vspace{1cm}
+
+        {\bfseries 摘要}\par
+        \vspace{0.5cm}
+        \begin{minipage}{0.8\textwidth}
+            \setlength{\parindent}{2em}
+            \setlength{\parskip}{1em}
+            \linespread{1}
+            \indent ...
+        \end{minipage}
+    \end{center}
+
+    \section{实验目的}
+    \begin{itemize}
+        \item 了解DNA指纹分析技术的原理和应用。
+        \item 级悉可發效国事联正复序3 YNTB）列知事联重复序列（SPR）多态性的含义。
+        \item 掌握可变数目串联重复序列和短串联重复序列多态性的检测和分析方法。
+    \end{itemize}
+
+    \section{实验原理}
+    \subsection{遗传标记和DNA指纹技术}
+    遗传标记在遗传学的建立和发展过程中有着举足轻重的作用，随着遗传学的进一步发展和分子生物学的异军突起，遗传标记先后相应地经历了形态标记、细胞学标记、生化标记和DNA分子标记四个发展阶段。DNA分子标记本质上是指能反映生物个体或种群间基因组中某种差异的特异性DNA片段。DNA分子标记大多以电泳谱带的形式表现生物个体之间的DNA差异，通常也称为DNA的指纹图谱。产生DNA指纹图谱的过程叫作DNA指纹分析。DNA指纹技术的发展日新月异，第一代的分子标记是以Southem 杂交为基础的限制性片段长度多态（restriction fragment length polymorphism,RFLP），第二代分子标记是以PCR为基础的各种DNA 指纹标记，如RAPD、 AFLP、短串联重复序列（shorttandem repeats,STR）和可变数目的重复序列 （variable number of tandem repeat，VNTR），第三代分子标记是以单核苷酸多态性为基础的SNP。一种理想的分子标记应具有以下特点：多态性高，重复性和稳定性好，带型清晰，容易统计，在染色体上均匀分布，共显性，简单快速，易自动化，开发和使用成本低廉等。\par
+    \subsection{人类DNA指纹分析}
+    人类基因组DNA 中存在一类串联重复序列，其核心序列的长度为10~70bp，该串联重复单位（核心序列）数目在人群中存在较大差异，具有高度多态性，称为可变数目串联重复序列（VNTR）或小卫星（mini-satellite）DNA。短串联重复序列（STR）形成多态性的原理与VNTR 基本相同。STR的核心序列短，为2~7bp，片段长度为100~500bp。STR位点广泛地分布在人类基因组中。据估计，在人类基因组中，每20kb就有一个包含3或4个核苷酸重复序列的STR位点。因STR具有高度多态性及遗传稳定性，已逐渐取代RFLP、VNTR而被广泛应用于遗传疾病的诊断和法医学个人识别。\par
+    \subsection{基因座选择}
+    本实验选择人类基因组中的三个 VNTR 基因座（D1S80, D17\$30和ApoB3’）和21号染色体上的四个STR 基因座（D21S11,D21S1432,D21S2054和D21S1446）作为研究对象，通过对人基因组 DNA的提取、多态性片段的PCR扩增以及电泳检测，了解串联重复序列多态性的含义和原理，掌握其检测和分析方法。\par
+
+    \section{实验用品}
+    \subsection{实验材料}
+    参试者口腔上皮细胞
+    \subsection{实验试剂}
+    \begin{enumerate}
+        \item 口腔上皮细胞DNA 提取
+        \begin{itemize}
+            \item 0.4\%生理盐水。\par
+            \item 裂解液：25 mmol/L NaOH,0.2 mmoI/L EDTA（乙二胺四乙酸）。\par
+            \item Tris-HCI（40 mmol/L,pH 5.0）。\par
+            \item 无水乙醇。\par
+            \item TE: 7 10 mmol/L Tris-HCI (pH8.0) # 1 mmol/L EDTA.\par
+        \end{itemize}
+        \item 全血DNA提取
+        \begin{itemize}
+            \item 5\% Chelex100 溶液：\par
+            \item Chelex 100 (Bio-Rad) 0.5 g, 50 mmol/L. Tris-HCI 10 mL, 用
+            4 mol/LNaOH调pH至11.0，室温可保存3个月，使用前充分混匀。\par
+        \end{itemize}
+        \item PCR 试剂
+        \begin{itemize}
+            \item 2×Taq PCR Master Mix, ddIl.O，上下游引物，模板 DNA。\par
+        \end{itemize}
+        \item 电泳检测试剂
+        \begin{itemize}
+            \item 2.0\%琼脂糖凝胶：称取2.0g琼脂糖放人250 mL. 三角烧瓶，加入1XTAE 溶液100mL 微波炉加热溶解，冷却至60°C左右加入终浓度为1wg/mL.溴化乙锭（EB），缓慢混匀后倒胶板。\par
+            \item 10×TAE电泳缓冲液：Tris 48.4g，冰醋酸11.42 mL, 0.5 mol/LEDTA （pH8.0） 20mL，蒸馏水定容至1000 mL，室温保存。\par
+            \item 0.5 mo/L EDTA （pH8.0）： Naz EDTA 18.61 g，NaOH 2.0g，蒸馏水定容至100mL。\par
+            \item 溴化乙锭（EB）：用无菌水配制5 mg/mL储藏液，工作浓度1 wg/ml。\par
+            \item  10x上样缓冲液（Loading dye）：溴酚蓝0.25g，二甲苯腈蓝0.25g，蔗糖50.0g（或甘油50mL），用无菌水60mL（用甘油时49mL）溶解上述试剂，定至100mL，室温保存。\par
+            \item 0.16 mol/L硝酸溶液。\par
+            \item  10 mmo/L硝酸银溶液。\par
+            \item 0.28 mol/L碳酸钠溶液。\par
+            \item 1.67 mol/L乙酸。\par
+            \item 聚丙烯酰胺，DNA相对分子质量标记。\par
+        \end{itemize}
+    \end{enumerate}
+    \subsection{实验仪器}
+    微量移液器、高速冷冻离心机、恒温水浴锅、旋涡振荡器、PCR扩增仪、电泳仪、电泳槽、凝胶成像系统、冰箱、制冰机、无菌枪头、无菌离心管（1.5 mL,0.5 mL）、无菌棉签、离心管盒、枪头盒、纸杯等。
+
+    \section{实验步骤}
+    \subsection{可变数目串联重复序列(VNTR)}
+    \begin{enumerate}
+        \item 基因组DNA 的提取\par
+        \begin{enumerate}
+            \item 漱口，用无菌棉签刮取口腔脱落上皮细胞\par
+            \item 将富集口腔脱落細胞的口監拭于放人盤有人m生和不的1.3mL离心管中。\par
+            \item 将拭子置于振荡器上，振荡1min 左右，少心地娶這相金，再用适最的生理盐水冲洗。\par
+            \item 13000rmin离心Jmin、小入批将主余的消被全部取起。记能物即为脱答上皮細胞，\par
+            \item 在流淀中加人25～50ML裂解液，振満10s。\par
+            \item 98と孵育20min，振満后加入等体根Tis-HICI （40 mmol/L, pH5.0）。\par
+            \item 13 000 t/min 离心10 min，取上清液。\par
+            \item 加人无水乙醇，-20°C放置15 min。\par
+            \item 13000 r/min 离心15 mino\par
+            \item 弃上清，晾干后即得到口腔脱落上皮细胞DNA。\par
+            \item 加入适量TE 溶解 DNA，4°C或-20C保存待用。\par
+        为提高DNA的产率和纯度，可选用TANamp SwabDNA Kit（口腔拭子基因组DNA提取试剂盒，离心柱型，目录号：DP322）。\par
+        \end{enumerate}
+        \item PCR扩增\par
+        3个VNTR基因座的引物序列和PCR扩增体系及扩增参数分别见表\ref{tab:table1}和表\ref{tab:table2}。\par
+        \begin{longtable}{c|p{4.7cm}cccc}
+            \toprule
+            位点 & \centering{引物序列} & 変性 & 退火 & 延伸 & 循环数 \\
+            \midrule
+            DIS80 & \centering \tiny 5'-GAAACTGGCCTCCAAACACTGCCCGCCG-3'\par 5'-GTCTTGTTGGAGATGCACGTGCCCCTTGC-3' & 95 °C, 60 s & 65 °C, 60 s & 72 °C, 60 s & 30 \\
+            D17S30 & \centering \tiny 5'-GGAAGAGTGAAGTGCACAGG-3'\par 5'-CACAGTCTTTATTCTTCAGCG-3' & 94 °C, 30 s & 55 °C, 30 s & 72 °C, 80 s & 30 \\
+            ApoB3' & \centering \tiny 5'-ATGGAAACGGAGAAATTATG-3'\par 5'-CCTTCTCACTTGGCAAATAC-3' & 94 °C, 60 s & 63 °C,60 s & 72 °C,120 s & 26 \\
+            \bottomrule
+            \caption{3个VNTR基因座的引物序列和PCR扩增条件}
+            \label{tab:table1} \\
+        \end{longtable}
+
+        \begin{longtable}{cc}
+            \toprule
+            名称 & 体积/微升 \\
+            \midrule
+            上游引物（5wm） & 1.0 \\
+            下游弓物（5wm） & 1.0 \\
+            2xTaq PCR Master Mix & 12.5 \\
+            dd$H_2O$ & 0.5 \\
+            模板 DNA & 10.0 \\
+            总体积 & 25.0 \\
+            \bottomrule
+            \caption{3个VNTR位点PCR扩增体系}
+            \label{tab:table2} \\
+        \end{longtable}
+
+        \item 电泳与检测\par
+        采用2\%琼脂糖凝胶60V电泳，30~40 min后取出凝胶用清水漂洗5～10 min。凝胶成像系统观察和记录每个个体的DNA条带数目及其位置\par
+        \item 数据记录与分析\par
+        读取各个体样本的基因型，计算基因型频率及等位基因频率，用x检验进行Hardy-Neinberg 平衡吻合度检验。\par
+    \end{enumerate}
+    \subsection{短串联重复序列(STR)}
+    \begin{enumerate}
+        \item 基因组DNA的提取
+            \begin{enumerate}
+                \item 取3-10mL 全血加入1.5 mL离心管中，再加人500wL纯水，剧烈振荡，室温下放置15 min。
+                \item 13000 t/min离心3min，弃上清，收集沉淀。（必要时可用蒸馏水反复清洗沉淀物，直至无色或血色素很少）。
+                \item 沉淀中加人200 wL 5\% Chelex-100溶液（5\% Chelex-100为悬浊液，使用前要充分振摇，使Chelex-100颗粒悬浮），在振荡器上反复振荡后，放人56°C水浴保温30min以上。
+                \item 取出后振荡，100°C保温8 min，再振荡后，13000 t/min离心3min，上清用于PCR扩增，或放4°C保存备用。（此DNA样本可在4°C或-20°C保存，必要时在使用前再次加热并离心，使管内物质分层）
+            \end{enumerate}
+        \item 位点选择及其特性(表\ref{tab:table3})\par
+        \begin{longtable}{cccc}
+            位点 & 重复序列 & 片段大小(bp) & 染色体位置(Mb) \\
+            \midrule
+            D21S11 & TCTG & 202\~260 & 21q22.11 \\
+            D21S1432 & ATAG/TAGA & 127\~155 & 21q22.2 \\
+            D21S2054 & TCTA & 162\~182 & 21q22.11 \\
+            D21S1446 & TCTA/ATCT & 160\~187 & 21q22.3 \\
+            \bottomrule
+            \caption{4个21号染色体STR位点的基本参数}
+            \label{tab:table3} \\
+        \end{longtable}
+        \item PCR扩增\par
+        3个VNTR基因座的引物序列和PCR扩增体系及扩增参数分别见表\ref{tab:table4}和表\ref{tab:table5}。\par
+        \begin{longtable}{c|p{4.7cm}cccc}
+            \toprule
+            位点 & \centering{引物序列} & 変性 & 退火 & 延伸 & 循环数 \\
+            \midrule
+            D21S11 & \tiny \centering 5'-TATGTGAGTCAATTCCCCAAG-3'\par 5' -GTTGTATTAGTCAATGTTCTCC-3' & 95°C,15s & 58°C,60s & 60°C,60s & 30 \\
+            D21S1432 & \tiny \centering 5'-CTTAGAGGGACAGAACTAATAGGC-3'\par 5'-AGCCTATTGTGGGTTTGTGA-3' & 95°C,15s & 60°C,60s & 60°C,60s & 30 \\
+            D21S2054 & \tiny \centering 5'-GAGTAAATGTCATGAAACAAGG-3'\par 5'-ATGATAGGTAGATGGATCAATTAGA-3' & 95°C,40s & 56°C,40s & 72°C,30s & 32 \\
+            D21S1446 & \tiny \centering 5'-ATGTACGATACGTAATACTTGAGAA-3'\par 5'-GTCCCAAAGGACCTGCTC-3' & 94°C,40s & 56°C,50s & 72°C,50s & 35 \\
+            \bottomrule
+            \caption{4个VNTR基因座的引物序列和PCR扩增条件}
+            \label{tab:table4} \\
+        \end{longtable}
+        \begin{longtable}{cc}
+            \toprule
+            名称 & 体积/微升 \\
+            \midrule
+            上游引物(S wm) & 2.2 \\
+            下游引物(S wm) & 1.2 \\
+            2XTaq PCR MasterMix & 6.0 \\
+            dd$H_2O$ & 2.1 \\
+            模板DNA & 2.0 \\
+            总体积 & 12.5 \\
+            \bottomrule
+            \caption{4个21号染色体STR位点PCR扩增体系}
+            \label{tab:table5} \\
+        \end{longtable}
+        \item 变性凝胶电泳\par
+        取扩增产物2.0wL与2.0wL变性加样缓冲液混合均匀，95°C变性2 min，立即置于冰浴，采用6\%变性聚丙烯酰胺凝胶垂直电泳，先预电泳1h，上样后恒功率40W，电泳3h。完毕后将凝胶取下，用双蒸水冲洗1次，置于0.16 malL硝酸溶液中，轻摇反应10min，双蒸水冲洗，再置于10 mmol/L硝酸银溶液中，轻摇反应20 min，双蒸水冲洗，然后置于0.28 mol/L 碳酸钠溶液中，轻摇反应，至条带清晰后加人1.67 molL乙酸终止反应并固定显色。\par
+        \item DNA序列的测定\par
+        挑选每个SIR 位点中至少2个以上不同片段长度的纯合子样本，经PCR扩增及纯化试剂盒纯化后进行 DNA序列测定，根据测序结果推测其余不同片段长度等位基因的重复数.\par
+        \item 统计学分析\par
+        运用直接计数法观察位点的基因频率，通过PowerStats软件进行数据统计分析，计算杂合度（heleroaygosily，H）、多态信息量（polymorphism informationcontent, PIC）及个体识别率（average power of discrimination,PD）。用x进行 Hardy-Weinberg平衡吻合度检验。\par
+        $$
+        H = 1 - \sum_{i=1}^{n}p_i^2
+        $$
+        其中: n为等位基因的数目, $p_i$为单位基因的频率。\par
+        $$
+        PIC = 1 - \sum_{i=1}^{n}p_i^2 - \sum_{i-1}^{n-1}\sum_{j=i+1}^{n}2p_i^2p_j^2
+        $$
+        其中: n为等位基因的数目, $p_i$为第一个等位基因在群体中的频率。\par
+
+    \end{enumerate}
+
+    \section{实验结果}
+    \section{讨论}
+    \section{参考文献}
+
+    %% 插入项目
+    %\begin{itemize}
+    %    \item
+    %\end{itemize}
+    % OR
+    %\begin{enumerate}
+    %    \item
+    %\end{enumerate}
+
+    %% 插入引用
+    %\begin{quote}
+    %\textbf{...}
+    %\end{quote}
+
+    %% 插入图片
+    %\begin{center}
+    %    \includegraphics[width=150pt]{./img/}
+    %\end{center}
+
+    %% 插入表格
+    %\begin{longtable}{cccc}
+    %    \toprule
+    %    项目0 & 项目1 & 项目2 & 项目3 \\
+    %    \midrule
+    %    ? & ? & ? & ? \\
+    %    \bottomrule
+    %    \caption{table name}
+    %\end{longtable}
+
+    %% 插入代码
+    %\begin{lstlisting}[language=?, caption={code}, label={lst:listing-example}, style=?]
+    %    print("helloworld")
+    %\end{lstlisting}
+
+\end{document}

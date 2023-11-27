@@ -1,0 +1,25 @@
+\providecommand{\href}[2]{#2}\begingroup\zihao{5}\begin{thebibliography}{1}\linespread{1}\selectfont\setlength{\baselineskip}{16pt}\setlength{\parskip}{0pt}
+\makeatletter
+\providecommand \href@noop [0]{\@secondoftwo}%
+
+\bibitem{saiki1985enzymatic}
+Saiki R~K, Scharf S, Faloona F, et~al. { Enzymatic amplification of
+  $\beta$-globin genomic sequences and restriction site analysis for diagnosis
+  of sickle cell anemia}[J]. Science, 1985, 230(4732):1350--1354.
+
+\bibitem{SWXT201802015}
+李文杨. {
+  8对人类遗传性状的调查和指纹分析——以信阳农林学院为例}[J].
+  生物学通报, 2018, 53(41-44).
+
+\bibitem{LCJY200504038}
+史燕顺 �. {
+  Dna指纹分析在肿瘤临床诊断中的应用研究进展}[J].
+  临床检验杂志, 2005, (310-311).
+
+\bibitem{GWYY198703006}
+Jeffreys � 苏长林. {
+  人类系谱中多个遗传标记的dna“指纹图”和分离分析}[J].
+  国外医学.遗传学分册, 1987, (138-140).
+
+\end{thebibliography}\endgroup
