@@ -1,0 +1,9 @@
+.idea/
+log/
+src.bbl
+src.synctex.gz
+.Rproj.user/
+.RData
+.Rhistory
+R.Rproj
+data/*.xlsx
